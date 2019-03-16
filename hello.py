@@ -4,11 +4,24 @@ import urllib2
 import json
 import timestring
 import requests
-from pprint import pprint
-from eventObject import eventObject
-from flask import Flask, url_for
+
+from eventFunctions import getEventsByFestival
+
+from flask import Flask, url_for, render_template, request
 app = Flask(__name__)
+
+start = 0
 
 @app.route('/')
 def index():
-    return 'This will be a cool website soon'
+  start = 0
+  return render_template('index.html')
+
+@app.route('/festivals.html', methods=['POST'])
+def festivals():
+  festival = request.form["Category"]
+  perpage = request.form["per_page"]
+  year = request.form["year"]
+  events = getEventsByFestival(festival, year, perpage, start)
+  return \
+  render_template('festivals.html', events=events)

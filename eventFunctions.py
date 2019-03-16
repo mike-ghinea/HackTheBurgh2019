@@ -10,16 +10,36 @@ from eventObject import eventObject
 import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
-api_key    = 'V37UcPDfsVDiaYgs'
-secret_key = 'yOjBov7vc-0op26qkHmaLOL4abzb34oK'
 
-def getEventsByFestival(festival):
+festivals = ['fringe',
+'demofringe',
+'jazz',
+'book',
+'international',
+'tattoo',
+'art',
+'hogmanay',
+'science',
+'imaginate',
+'film',
+'mela',
+'storytelling']
 
-  query      = '/events?festival=' + festival + '&year=2019&key=' + api_key
+
+def getEventsByFestival(festival, year, perpage, start):
+
+  api_key    = 'V37UcPDfsVDiaYgs'
+  secret_key = 'yOjBov7vc-0op26qkHmaLOL4abzb34oK'
+
+  query      = '/events?festival=' + festivals[int(festival)] \
+              + '&year=' + str(year) + '&size=' + str(perpage) \
+              + '&from=' + str(start) + '&key=' + api_key
 
   signature  = hmac.new(secret_key, query, hashlib.sha1).hexdigest()
   url        = \
   'https://api.edinburghfestivalcity.com' + query + '&signature=' + signature
+
+  print url
 
   response = requests.get(url)
   data = json.loads(response.text)
@@ -35,6 +55,8 @@ def getEventsByFestival(festival):
   return events
 
 def getEventsByGenre(genre):
+  api_key    = 'V37UcPDfsVDiaYgs'
+  secret_key = 'yOjBov7vc-0op26qkHmaLOL4abzb34oK'
   query      = '/events?genre=' + genre + '&year=2019&key=' + api_key
 
   signature  = hmac.new(secret_key, query, hashlib.sha1).hexdigest()
