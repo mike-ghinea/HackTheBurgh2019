@@ -8,7 +8,9 @@ import requests
 from eventFunctions import getEventsByFestival
 
 from flask import Flask, url_for, render_template, request
+from flask_bootstrap import Bootstrap
 app = Flask(__name__)
+Bootstrap(app)
 
 start = 0
 
