@@ -57,20 +57,19 @@
       </a>
     </div>
     <!-- Carousel end -->
-    <div class="container panel-group">
-      {% for e in events %}
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2>{{ e.title }}</h2>
-        </div>
-        <div class="panel-body">
-        {{ e.description }}
-        </div>
-        {% else %}
-          <em>No events match these specifications.</em>
+    {% for e in events %}
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{ e.title }}</h4>
+        <h6 class="card-subtitle mb-2 text-muted">{{ e.festival }}</h6>
+        <p class="card-text">  {{ e.description }}</p>
+        <a href="#" class="card-link">{{ e.artist }}</a>
+        <a href="#" class="card-link"></a>
       </div>
-      {% endfor %}
     </div>
+    {% else %}
+    <em>No events match these specifications.</em>
+    {% endfor %}
 
       <script src="/static/carousel.js"></script>
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
