@@ -57,8 +57,19 @@
       </a>
     </div>
     <!-- Carousel end -->
-    <div class="container">
-      {{events}}
+    <div class="container panel-group">
+      {% for e in events %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2>{{ e.title }}</h2>
+        </div>
+        <div class="panel-body">
+        {{ e.description }}
+        </div>
+        {% else %}
+          <em>No events match these specifications.</em>
+      </div>
+      {% endfor %}
     </div>
 
       <script src="/static/carousel.js"></script>
